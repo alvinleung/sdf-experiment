@@ -1,6 +1,5 @@
 import * as THREE from "three";
-import { OrbitControls } from "three/examples/jsm/Addons.js";
-import SHADER_FRAG from "./shader.frag";
+import SHADER_FRAG from "./shader2.frag";
 import SHADER_VERT from "./shader.vert";
 
 const scene = new THREE.Scene();
@@ -25,6 +24,15 @@ const handleMouseMove = (event: PointerEvent) => {
 };
 window.addEventListener("pointermove", handleMouseMove);
 
+// handle screen resize
+const handleResize = () => {
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+};
+window.addEventListener("resize", handleResize);
+
+// add geometry to the scene
 const geometry = new THREE.PlaneGeometry(1, 1, 6, 6);
 const material = new THREE.ShaderMaterial({
   uniforms: {
@@ -39,10 +47,8 @@ const obj = new THREE.Mesh(geometry, material);
 scene.add(obj);
 
 camera.position.z = 1;
-const controls = new OrbitControls(camera, renderer.domElement);
 
 function animate(time: number) {
-  controls.update();
   renderer.render(scene, camera);
 }
 

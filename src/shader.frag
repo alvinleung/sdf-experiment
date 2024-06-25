@@ -16,6 +16,7 @@ void main() {
   // 1.0 to invert the colour
   float baseCircle = 1.0 - sdCircle(uv, 0.25) * 4.0; 
 
+  // float combinedCircle = mouseCircle + baseCircle;
   float combinedCircle = mouseCircle + baseCircle;
 
   gl_FragColor = vec4(vec3(combinedCircle), 1.0);
