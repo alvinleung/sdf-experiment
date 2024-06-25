@@ -17,11 +17,14 @@ void main() {
   
   // make mouse into +.5 to -.5 instead of +1 to -1
   vec2 mouse = uMouse/2.0;
-  float mouseCircle = 1.0 - sdCircle(uv, mouse); 
+  float mouseCircle = 1.0 - smoothstep(0.1, 0.8, sdCircle(uv*1.4, mouse)); 
 
-  float baseShape = sdRoundRect(uv, vec2(.6,.6), .05);
+  float baseShape = 1.0 - smoothstep(.4, .6, sdRoundRect(uv + 0.5, vec2(0.5, 0.5), .05));
 
-  gl_FragColor = vec4(vec3(mouseCircle), 1.0);
+  float color = smoothstep(0.5,.6, baseShape + mouseCircle);
+  // float color = mouseCircle;
+  // float color = baseShape;
+  gl_FragColor = vec4(vec3(color), 1.0);
 
   // Output UV square
   // gl_FragColor = vec4(vUv, 0.0, 1.0);
