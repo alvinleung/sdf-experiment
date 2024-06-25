@@ -1,4 +1,5 @@
 uniform vec2 uMouse;
+uniform float uTime;
 varying vec2 vUv;
 
 float sdCircle(vec2 st, vec2 center) {
@@ -19,7 +20,6 @@ void main() {
   float mouseCircle = 1.0 - sdCircle(uv, mouse); 
 
   float baseShape = sdRoundRect(uv, vec2(.6,.6), .05);
-  baseShape = smoothstep()
 
   gl_FragColor = vec4(vec3(mouseCircle), 1.0);
 

@@ -49,6 +49,7 @@ scene.add(obj);
 camera.position.z = 1;
 
 function animate(time: number) {
+  material.uniforms.uTime.value = time;
   renderer.render(scene, camera);
 }
 
